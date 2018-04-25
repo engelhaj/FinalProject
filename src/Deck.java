@@ -4,14 +4,17 @@ import java.util.Collections;
 public class Deck {
 	private ArrayList<Card> avCards;
 	private ArrayList<Card> disCards;
+	private ArrayList<Card> drawnCards;
 	public Deck(){
 		avCards = new ArrayList<>();
 		disCards = new ArrayList<>();
 		initializeDeck();
 		System.out.println(avCards);
+		System.out.println(drawnCards);
 		System.out.println(disCards);
-		drawCard();
+		hit();
 		System.out.println(avCards);
+		System.out.println(drawnCards);
 		System.out.println(disCards);	
 	}
 	private void initializeDeck(){
@@ -24,13 +27,21 @@ public class Deck {
 		}
 		Collections.shuffle(avCards);
 	}
-	public Card drawCard(){
+	public Card hit(){ //hit means to drawCard
 		Card choosenCard = avCards.get(0);
 		disCards.add(choosenCard);
 		avCards.remove(choosenCard);
+		drawnCards.add(choosenCard);
 		return choosenCard;
 		
 	}
+//	public int addUpValues(){
+//		int total = 0;
+//		for(int i = 0; i < drawnCards.size(); i++){
+//			total += drawnCards[i].getValue();
+//		}
+//	}
+	
 
 	
 }

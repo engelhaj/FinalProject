@@ -45,12 +45,14 @@ public class Card {
 		case "Ace":
 			value = 11;
 		}
-		
+	}
+	public int getValue(int value){
+		return value;
 	}
 
 	@Override
 	public String toString() {
-		return "Card [rank=" + rank + ", suit=" + suit + ", value=" + value + "]";
+		return "Card [rank =" + rank + ", suit =" + suit + ", value =" + value + "]";
 	}
 	
 	
