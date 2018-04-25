@@ -4,18 +4,20 @@ import java.util.Collections;
 public class Deck {
 	private ArrayList<Card> avCards;
 	private ArrayList<Card> disCards;
-	private ArrayList<Card> drawnCards;
 	public Deck(){
 		avCards = new ArrayList<>();
 		disCards = new ArrayList<>();
 		initializeDeck();
-		System.out.println(avCards);
-		System.out.println(drawnCards);
-		System.out.println(disCards);
+		System.out.println(avCards.size());
+		System.out.println(disCards.size());
+		System.out.println("                  ");
 		hit();
-		System.out.println(avCards);
-		System.out.println(drawnCards);
-		System.out.println(disCards);	
+		System.out.println(avCards.size());
+		System.out.println(disCards.size());
+		System.out.println("                  ");
+		reset();
+		System.out.println(avCards.size());
+		System.out.println(disCards.size());
 	}
 	private void initializeDeck(){
 		String[] suits = {"Spades", "Hearts", "Diamonds", "Clubs"};
@@ -28,19 +30,20 @@ public class Deck {
 		Collections.shuffle(avCards);
 	}
 	public Card hit(){ //hit means to drawCard
-		Card choosenCard = avCards.get(0);
-		disCards.add(choosenCard);
-		avCards.remove(choosenCard);
-		drawnCards.add(choosenCard);
-		return choosenCard;
+		Card chosenCard = avCards.get(0);
+		disCards.add(chosenCard);
+		avCards.remove(chosenCard);
+		return chosenCard;
 		
 	}
-//	public int addUpValues(){
-//		int total = 0;
-//		for(int i = 0; i < drawnCards.size(); i++){
-//			total += drawnCards[i].getValue();
-//		}
-//	}
+	public void reset(){
+		for(int i = 0; i < disCards.size() ;i++){
+			avCards.add(disCards.get(i));
+		}
+		disCards.clear();
+		Collections.shuffle(avCards);
+	}
+
 	
 
 	
