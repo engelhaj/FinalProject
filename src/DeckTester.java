@@ -19,15 +19,17 @@ public class DeckTester {
 		System.out.println("====Player 2 Info====");
 		p2.addCard(d1.drawCard());
 		p2.addCard(d1.drawCard());
+		System.out.println(p2.getHand());
 		System.out.println(d1.getAvCards().size());
+		//System.out.println(getTotalValueOfHand(p2.getHand()));
 
 	}
 	
-	public int getTotalValueOfHand(Player p1){
-		int total = 0;
-		for(int i = 0; i < p1.getHand().size(); i++){
-			total += p1.getHand().get(i).getValue(i);
-		}
-		return total;
-	}
+	//public static int getTotalValueOfHand(ArrayList<Card> hand){
+		//int total = 0;
+		//for(int i = 0; i < hand.size(); i++){
+			//total += hand.get(i).getValue();
+		//}
+		//return total;
+	//}
 }

@@ -46,15 +46,15 @@ public class Card {
 			value = 11;
 		}
 	}
-	public int getValue(int value){
+	public int getValue(){
 		return value;
 	}
 
 	@Override
 	public String toString() {
-		return "Card [rank =" + rank + ", suit =" + suit + ", value =" + value + "]";
+		return "Card [rank = " + rank + ", suit = " + suit + ", value = " + value + "]";
 	}
-	
+
 	
 	
 }
