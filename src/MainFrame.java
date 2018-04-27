@@ -35,23 +35,10 @@ public class MainFrame extends JFrame implements PanelChangeListener{
 	public MainFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
+		contentPane = new BlackJack(this);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JButton btnHelp = new JButton("Help");
-		btnHelp.setBounds(6, 50, 117, 29);
-		btnHelp.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				listener.changePanel("MainFrame");
-			}
-			
-		});
-		contentPane.add(btnHelp);
 	}
 
 	@Override
@@ -59,13 +46,19 @@ public class MainFrame extends JFrame implements PanelChangeListener{
 		// TODO Auto-generated method stub
 		JPanel newPanel = null;
 		
-		if(panelName.equals("RulesPanel")){
-			newPanel = new RulesPanel();
+		if(panelName.equals("BlackJack")){
+			newPanel = new BlackJack(this);
 		}
+		 if (panelName.equals("RulesPanel")){
+			newPanel = new RulesPanel(this);
+		}
+		//else if (panelName.equals("SomeOtherOtherPanel"){
 		
 		if(newPanel != null){
 			setContentPane(newPanel);
 			validate();
+			
 		}
 	}
+
 }
