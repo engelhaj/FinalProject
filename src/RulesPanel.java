@@ -1,13 +1,19 @@
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class RulesPanel extends JPanel {
+import javax.swing.JButton;
 
+public class RulesPanel extends JPanel{
+	
+	private JPanel contentPane;
+	private PanelChangeListener listener;
 	/**
 	 * Create the panel.
 	 */
-	public RulesPanel() {
+	public RulesPanel(PanelChangeListener listener) {
 		setLayout(null);
 		
 		JLabel lblRules = new JLabel("Rules");
@@ -36,10 +42,48 @@ public class RulesPanel extends JPanel {
 		lblThanTheDealer.setBounds(36, 153, 117, 16);
 		add(lblThanTheDealer);
 		
-		JLabel lblRankings = new JLabel("Rankings:");
+		JLabel lblRankings = new JLabel("Special Rankings:");
 		lblRankings.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		lblRankings.setBounds(6, 181, 78, 16);
+		lblRankings.setBounds(6, 181, 117, 16);
 		add(lblRankings);
+		
+		JLabel lblRoyals = new JLabel("Royals = 10");
+		lblRoyals.setBounds(36, 209, 95, 16);
+		add(lblRoyals);
+		
+		JLabel lblAces = new JLabel("Aces = 11 or 1");
+		lblAces.setBounds(36, 237, 126, 16);
+		add(lblAces);
+		
+		JLabel lblBetting = new JLabel("Betting:");
+		lblBetting.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblBetting.setBounds(6, 265, 117, 16);
+		add(lblBetting);
+		
+		JLabel lblBlackjack = new JLabel("BlackJack = x1.5");
+		lblBlackjack.setBounds(36, 293, 117, 16);
+		add(lblBlackjack);
+		
+		JLabel lblWin = new JLabel("Win = x2.0");
+		lblWin.setBounds(36, 321, 87, 16);
+		add(lblWin);
+		
+		JLabel lblTie = new JLabel("Tie = x0.0");
+		lblTie.setBounds(36, 349, 87, 16);
+		add(lblTie);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(6, 391, 117, 29);
+		btnBack.addActionListener(new ActionListener(){
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				listener.changePanel("BlackJack");
+			}
+			
+		});
+		add(btnBack);
+		
 	}
 }
