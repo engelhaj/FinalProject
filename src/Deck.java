@@ -8,13 +8,14 @@ public class Deck {
 		avCards = new ArrayList<>();
 		disCards = new ArrayList<>();
 		initializeDeck();
+		System.out.println("====Length When first made====");
 		System.out.println(avCards.size());
 		System.out.println(disCards.size());
-		System.out.println("                  ");
-		hit();
+		System.out.println("====Length After Drawing Card====");
+		drawCard();
 		System.out.println(avCards.size());
 		System.out.println(disCards.size());
-		System.out.println("                  ");
+		System.out.println("====Length After Reset====");
 		reset();
 		System.out.println(avCards.size());
 		System.out.println(disCards.size());
@@ -29,7 +30,7 @@ public class Deck {
 		}
 		Collections.shuffle(avCards);
 	}
-	public Card hit(){ //hit means to drawCard
+	public Card drawCard(){ //hit means to drawCard
 		Card chosenCard = avCards.get(0);
 		disCards.add(chosenCard);
 		avCards.remove(chosenCard);
@@ -43,7 +44,14 @@ public class Deck {
 		disCards.clear();
 		Collections.shuffle(avCards);
 	}
-
+	public ArrayList<Card> getAvCards() {
+		return avCards;
+	}
+	public ArrayList<Card> getDisCards() {
+		return disCards;
+	}
+	
+	
 	
 
 	
