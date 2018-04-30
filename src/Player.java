@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Player {
-	private double balance;
+	private double balance = 500;
 	private ArrayList<Card> hand;
 	
 	public Player(){
