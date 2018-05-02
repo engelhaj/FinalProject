@@ -46,6 +46,19 @@ public class BlackJack extends JPanel{
 		add(textField);
 		textField.setColumns(10);
 		
+		textField.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				double number = Integer.parseInt(textField.getText());
+				if(number <= p1.getBalance()){
+					//betAmount += number;
+					p1.changeBalance(-number);
+					lblAmountBet.setText("$" + p1.getBalance());
+					textField.setText("");
+				}
+			}
+		});
+		
 		JLabel lblAmountBetting = new JLabel("Amount Betting");
 		lblAmountBetting.setBounds(17, 313, 106, 16);
 		add(lblAmountBetting);

@@ -85,5 +85,6 @@ public class RulesPanel extends JPanel{
 		});
 		add(btnBack);
 		
+		
 	}
 }
