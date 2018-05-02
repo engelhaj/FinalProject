@@ -64,7 +64,7 @@ public class RulesPanel extends JPanel{
 		lblBlackjack.setBounds(36, 293, 117, 16);
 		add(lblBlackjack);
 		
-		JLabel lblWin = new JLabel("Win = x2.0");
+		JLabel lblWin = new JLabel("Win = x1.0");
 		lblWin.setBounds(36, 321, 87, 16);
 		add(lblWin);
 		
