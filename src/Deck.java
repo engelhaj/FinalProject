@@ -12,7 +12,7 @@ public class Deck {
 		System.out.println(avCards.size());
 		System.out.println(disCards.size());
 		System.out.println("====Length After Drawing Card====");
-		drawCard();
+		hit();
 		System.out.println(avCards.size());
 		System.out.println(disCards.size());
 		System.out.println("====Length After Reset====");
@@ -30,7 +30,7 @@ public class Deck {
 		}
 		Collections.shuffle(avCards);
 	}
-	public Card drawCard(){ //hit means to drawCard
+	public Card hit(){ //hit means to drawCard
 		Card chosenCard = avCards.get(0);
 		disCards.add(chosenCard);
 		avCards.remove(chosenCard);

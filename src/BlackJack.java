@@ -1,10 +1,7 @@
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -49,6 +46,19 @@ public class BlackJack extends JPanel{
 		add(textField);
 		textField.setColumns(10);
 		
+		textField.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				double number = Integer.parseInt(textField.getText());
+				if(number <= p1.getBalance()){
+					//betAmount += number;
+					p1.changeBalance(-number);
+					lblAmountBet.setText("$" + p1.getBalance());
+					textField.setText("");
+				}
+			}
+		});
+		
 		JLabel lblAmountBetting = new JLabel("Amount Betting");
 		lblAmountBetting.setBounds(17, 313, 106, 16);
 		add(lblAmountBetting);
@@ -60,6 +70,12 @@ public class BlackJack extends JPanel{
 		JLabel lblPlayer = new JLabel("Player");
 		lblPlayer.setBounds(218, 395, 61, 16);
 		add(lblPlayer);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+
+		lblNewLabel_1.setIcon(new ImageIcon("BlackCard.jpg"));
+		lblNewLabel_1.setBounds(171, 155, 116, 80);
+		add(lblNewLabel_1);
 		
 	}
 }

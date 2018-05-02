@@ -8,7 +8,7 @@ public class DeckTester {
 		Player p1 = new Player();
 		Player p2 = new Player();
 		p1.setBalance(50.00);
-		p1.addCard(d1.drawCard());
+		p1.addCard(d1.hit());
 		System.out.println("= = = = Player 1 Info = = = =");
 		System.out.println(p1.getHand());
 		//p1.changeBalance(-5);
@@ -17,15 +17,15 @@ public class DeckTester {
 		//System.out.println(p1.getBalance());
 		//System.out.println(d1.getAvCards().size());
 		System.out.println("= = = = Player 2 Info = = = =");
-		p2.addCard(d1.drawCard());
-		p2.addCard(d1.drawCard());
+		p2.addCard(d1.hit());
+		p2.addCard(d1.hit());
 		System.out.println(p2.getHand());
 		//System.out.println(d1.getAvCards().size());
 		//System.out.println(p2.getHand().get(0).getValue()); //Checks the value of the first card in p2's hand
 		//System.out.println(getTotalValueOfHand(p2));
 		System.out.println(canHit(p2));
 		if(canHit(p2) == true){
-			p2.addCard(d1.drawCard());
+			p2.addCard(d1.hit());
 		}
 		System.out.println(p2.getHand());
 		System.out.println(whoWins(p1,p2));
