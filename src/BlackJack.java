@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 public class BlackJack extends JPanel{
 	private PanelChangeListener listener;
 	private JTextField textField;
+	double number;
 	/**
 	 * Create the panel. 
 	 */
@@ -49,13 +50,14 @@ public class BlackJack extends JPanel{
 		textField.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				double number = Integer.parseInt(textField.getText());
+				number = Integer.parseInt(textField.getText());
 				if(number <= p1.getBalance()){
 					//betAmount += number;
 					p1.changeBalance(-number);
 					lblAmountBet.setText("$" + p1.getBalance());
 					textField.setText("");
 				}
+			
 			}
 		});
 		
@@ -76,6 +78,15 @@ public class BlackJack extends JPanel{
 		lblNewLabel_1.setIcon(new ImageIcon("BlackCard.jpg"));
 		lblNewLabel_1.setBounds(171, 155, 116, 80);
 		add(lblNewLabel_1);
+		
+		JLabel lblBetPlaced = new JLabel("Bet Placed:");
+		lblBetPlaced.setBounds(120, 285, 73, 16);
+		add(lblBetPlaced);
+		
+		JLabel lblNewLabel_2 = new JLabel("" + number);
+		lblNewLabel_2.setBounds(198, 285, 61, 16);
+		add(lblNewLabel_2);
+		
 		
 	}
 }
