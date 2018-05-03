@@ -19,6 +19,7 @@ public class BlackJack extends JPanel{
 		setLayout(null);
 		
 		Player p1 = new Player();
+		Player p2 = new Player();
 		Deck d1 = new Deck();
 		
 		JButton btnHelp = new JButton("Help");
@@ -33,17 +34,17 @@ public class BlackJack extends JPanel{
 			
 		});
 		add(btnHelp);
-		
-		JLabel lblBalance = new JLabel("Balance:");
-		lblBalance.setBounds(6, 285, 61, 16);
-		add(lblBalance);
 	
-		JLabel lblAmountBet = new JLabel("$" + p1.getBalance());
-		lblAmountBet.setBounds(62, 285, 61, 16);
+		JLabel lblBetPlaced = new JLabel("Bet Placed: $" + p1.getbetAmount());
+		lblBetPlaced.setBounds(6, 261, 117, 16);
+		add(lblBetPlaced);
+		
+		JLabel lblAmountBet = new JLabel("Balance: $" + p1.getBalance());
+		lblAmountBet.setBounds(6, 289, 106, 16);
 		add(lblAmountBet);
 		
 		textField = new JTextField();
-		textField.setBounds(6, 329, 130, 26);
+		textField.setBounds(0, 329, 130, 26);
 		add(textField);
 		textField.setColumns(10);
 		
@@ -51,18 +52,20 @@ public class BlackJack extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				number = Integer.parseInt(textField.getText());
-				if(number <= p1.getBalance()){
+				if(number <= p1.getBalance() && 0 <= p1.getbetAmount() && number >= 0){
 					//betAmount += number;
 					p1.changeBalance(-number);
-					lblAmountBet.setText("$" + p1.getBalance());
+					p1.changebetAmount(number);
+					lblAmountBet.setText("Balance: $" + p1.getBalance());
+					lblBetPlaced.setText("Bet Placed: $" + p1.getbetAmount());
 					textField.setText("");
 				}
 			
 			}
 		});
 		
-		JLabel lblAmountBetting = new JLabel("Amount Betting");
-		lblAmountBetting.setBounds(17, 313, 106, 16);
+		JLabel lblAmountBetting = new JLabel("Amount Betting:");
+		lblAmountBetting.setBounds(6, 313, 106, 16);
 		add(lblAmountBetting);
 		
 		JLabel lblNewLabel = new JLabel("Dealer");
@@ -78,14 +81,6 @@ public class BlackJack extends JPanel{
 		lblNewLabel_1.setIcon(new ImageIcon("BlackCard.jpg"));
 		lblNewLabel_1.setBounds(171, 155, 116, 80);
 		add(lblNewLabel_1);
-		
-		JLabel lblBetPlaced = new JLabel("Bet Placed:");
-		lblBetPlaced.setBounds(120, 285, 73, 16);
-		add(lblBetPlaced);
-		
-		JLabel lblNewLabel_2 = new JLabel("" + number);
-		lblNewLabel_2.setBounds(198, 285, 61, 16);
-		add(lblNewLabel_2);
 		
 		
 	}

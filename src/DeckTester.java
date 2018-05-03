@@ -19,6 +19,8 @@ public class DeckTester {
 		System.out.println("= = = = Player 2 Info = = = =");
 		p2.addCard(d1.hit());
 		p2.addCard(d1.hit());
+		//System.out.println(p2.getHand());
+		//p2.resetHand();
 		System.out.println(p2.getHand());
 		//System.out.println(d1.getAvCards().size());
 		//System.out.println(p2.getHand().get(0).getValue()); //Checks the value of the first card in p2's hand

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Player {
 	private double balance = 500;
 	private ArrayList<Card> hand;
+	private double betAmount = 0; 
 	
 	public Player(){
 		hand = new ArrayList<>();
@@ -24,7 +25,17 @@ public class Player {
 	public void setHand(ArrayList<Card> hand) {
 		this.hand = hand;
 	}
+	public void resetHand(){
+		hand.clear();
+	}
 	public void addCard(Card card){
 		hand.add(card);
+	}
+	public double getbetAmount(){
+		return betAmount;
+	}
+	public double changebetAmount(double amount){
+		betAmount = betAmount - (amount*-1);
+		return betAmount;
 	}
 }
