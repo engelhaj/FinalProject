@@ -85,6 +85,14 @@ public class RulesPanel extends JPanel{
 		});
 		add(btnBack);
 		
+		JLabel lblYouCan = new JLabel("3. You can tie by having the ");
+		lblYouCan.setBounds(263, 73, 201, 16);
+		add(lblYouCan);
+		
+		JLabel lblSameSumAs = new JLabel("same sum as the Dealer. ");
+		lblSameSumAs.setBounds(285, 101, 159, 16);
+		add(lblSameSumAs);
+		
 		
 	}
 }
