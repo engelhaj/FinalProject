@@ -96,19 +96,26 @@ public class BlackJack extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(getTotalValueOfHand(p1) <= 21 ){
+				if(getTotalValueOfHand(p1) == 0 && getTotalValueOfHand(dealer) == 0){
 					p1.addCard(d1.hit());
+					p1.addCard(d1.hit());
+					dealer.addCard(d1.hit());
+					dealer.addCard(d1.hit());
+					lblPlayerTotal.setText(" " + getTotalValueOfHand(p1));
+					lblDealerTotal.setText("" + getTotalValueOfHand(dealer));
+				}
+				else if(getTotalValueOfHand(p1) <= 21 && getTotalValueOfHand(p1) > 0){ //We know they will both be greater than 0 after the first if statement
 					if(d1.getAvCards().size() == 0){
 						lbldeckImage.setVisible(false);
 						//lblTotal.setText(" " + getTotalValueOfHand(p1));
 						//validate();
 					}
+					if(canHit(dealer) == true){
+						dealer.addCard(d1.hit());
+					}
 					lblPlayerTotal.setText(" " + getTotalValueOfHand(p1));
+					lblDealerTotal.setText("" + getTotalValueOfHand(dealer));
 				}
-				while(canHit(dealer) == true){ //Checks continously if the dealer can hit or not, if can then dealer will draw card
-					dealer.addCard(d1.hit());
-				}
-				lblDealerTotal.setText("" + getTotalValueOfHand(dealer));
 			}
 		});
 		
@@ -121,17 +128,7 @@ public class BlackJack extends JPanel{
 		}
 		return total;
 	}
-	
-	public static String whoWins(Player p1, Player p2){
-		if(getTotalValueOfHand(p1) > getTotalValueOfHand(p2) && getTotalValueOfHand(p1) <= 21 || getTotalValueOfHand(p2) > 21 && getTotalValueOfHand(p1) <= 21){
-			return "Player 1 wins";
-		}
-		if(getTotalValueOfHand(p1) < getTotalValueOfHand(p2) && getTotalValueOfHand(p2) <= 21 || getTotalValueOfHand(p1) > 21 && getTotalValueOfHand(p2) <= 21){
-			return "Player 2 wins";
-		}
-		return "tie";
-	}
-	
+		
 	public static boolean canHit(Player player){
 		if(getTotalValueOfHand(player) >= 17){
 			return false;
