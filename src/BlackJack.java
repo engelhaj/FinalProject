@@ -19,7 +19,7 @@ public class BlackJack extends JPanel{
 		setLayout(null);
 		
 		Player p1 = new Player();
-		Player p2 = new Player();
+		Player dealer = new Player();
 		Deck d1 = new Deck();
 		
 		JButton btnHelp = new JButton("Help");
@@ -68,20 +68,74 @@ public class BlackJack extends JPanel{
 		lblAmountBetting.setBounds(6, 313, 106, 16);
 		add(lblAmountBetting);
 		
-		JLabel lblNewLabel = new JLabel("Dealer");
-		lblNewLabel.setBounds(218, 6, 61, 16);
-		add(lblNewLabel);
+		JLabel lblDealerLabel = new JLabel("Dealer");
+		lblDealerLabel.setBounds(218, 6, 61, 16);
+		add(lblDealerLabel);
 		
-		JLabel lblPlayer = new JLabel("Player");
-		lblPlayer.setBounds(218, 395, 61, 16);
-		add(lblPlayer);
+		JLabel lblPlayerLabel = new JLabel("Player");
+		lblPlayerLabel.setBounds(218, 395, 61, 16);
+		add(lblPlayerLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("");
+		JLabel lbldeckImage = new JLabel("");
+		lbldeckImage.setIcon(new ImageIcon("BlackCard.jpg"));
+		lbldeckImage.setBounds(171, 155, 116, 80);
+		add(lbldeckImage);
+		
+		JLabel lblPlayerTotal = new JLabel("");
+		lblPlayerTotal.setBounds(206, 347, 61, 16);
+		add(lblPlayerTotal);
 
-		lblNewLabel_1.setIcon(new ImageIcon("BlackCard.jpg"));
-		lblNewLabel_1.setBounds(171, 155, 116, 80);
-		add(lblNewLabel_1);
+		JLabel lblDealerTotal = new JLabel("");
+		lblDealerTotal.setBounds(206, 64, 61, 16);
+		add(lblDealerTotal);
+		
+		JButton btnHit = new JButton("Hit");
+		btnHit.setBounds(6, 367, 117, 29);
+		add(btnHit);
+		btnHit.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(getTotalValueOfHand(p1) <= 21 ){
+					p1.addCard(d1.hit());
+					if(d1.getAvCards().size() == 0){
+						lbldeckImage.setVisible(false);
+						//lblTotal.setText(" " + getTotalValueOfHand(p1));
+						//validate();
+					}
+					lblPlayerTotal.setText(" " + getTotalValueOfHand(p1));
+				}
+				while(canHit(dealer) == true){ //Checks continously if the dealer can hit or not, if can then dealer will draw card
+					dealer.addCard(d1.hit());
+				}
+				lblDealerTotal.setText("" + getTotalValueOfHand(dealer));
+			}
+		});
 		
 		
+	}
+	public static int getTotalValueOfHand(Player player){ //Adds up the total value of the player's hand
+		int total = 0;
+		for(int i = 0; i < player.getHand().size(); i++){
+			total += player.getHand().get(i).getValue();
+		}
+		return total;
+	}
+	
+	public static String whoWins(Player p1, Player p2){
+		if(getTotalValueOfHand(p1) > getTotalValueOfHand(p2) && getTotalValueOfHand(p1) <= 21 || getTotalValueOfHand(p2) > 21 && getTotalValueOfHand(p1) <= 21){
+			return "Player 1 wins";
+		}
+		if(getTotalValueOfHand(p1) < getTotalValueOfHand(p2) && getTotalValueOfHand(p2) <= 21 || getTotalValueOfHand(p1) > 21 && getTotalValueOfHand(p2) <= 21){
+			return "Player 2 wins";
+		}
+		return "tie";
+	}
+	
+	public static boolean canHit(Player player){
+		if(getTotalValueOfHand(player) >= 17){
+			return false;
+		}
+		return true;
 	}
 }
