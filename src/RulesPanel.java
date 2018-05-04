@@ -51,7 +51,7 @@ public class RulesPanel extends JPanel{
 		lblRoyals.setBounds(36, 209, 95, 16);
 		add(lblRoyals);
 		
-		JLabel lblAces = new JLabel("Aces = 11 or 1");
+		JLabel lblAces = new JLabel("Aces = 11");
 		lblAces.setBounds(36, 237, 126, 16);
 		add(lblAces);
 		
