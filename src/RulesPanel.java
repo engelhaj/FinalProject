@@ -55,20 +55,20 @@ public class RulesPanel extends JPanel{
 		lblAces.setBounds(36, 237, 126, 16);
 		add(lblAces);
 		
-		JLabel lblBetting = new JLabel("Betting:");
+		JLabel lblBetting = new JLabel("Betting Returns:");
 		lblBetting.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		lblBetting.setBounds(6, 265, 117, 16);
 		add(lblBetting);
 		
-		JLabel lblBlackjack = new JLabel("BlackJack = x1.5");
+		JLabel lblBlackjack = new JLabel("Blackjack = x2.5");
 		lblBlackjack.setBounds(36, 293, 117, 16);
 		add(lblBlackjack);
 		
-		JLabel lblWin = new JLabel("Win = x1.0");
+		JLabel lblWin = new JLabel("Win = x2.0");
 		lblWin.setBounds(36, 321, 87, 16);
 		add(lblWin);
 		
-		JLabel lblTie = new JLabel("Tie = x0.0");
+		JLabel lblTie = new JLabel("Tie = x1.0");
 		lblTie.setBounds(36, 349, 87, 16);
 		add(lblTie);
 		
