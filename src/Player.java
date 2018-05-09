@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Player {
-	private double balance = 500;
+	private double balance = 100;
 	private ArrayList<Card> hand;
 	private double betAmount = 0; 
 	
@@ -37,5 +37,8 @@ public class Player {
 	public double changebetAmount(double amount){
 		betAmount = betAmount - (amount*-1);
 		return betAmount;
+	}
+	public void setbetAmount(double betAmount){
+		this.betAmount = betAmount;
 	}
 }

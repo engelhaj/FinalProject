@@ -7,16 +7,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
 public class BlackJack extends JPanel{
 	private PanelChangeListener listener;
 	private JTextField textField;
 	double number;
+	double multiplier;
 	/**
 	 * Create the panel. 
 	 */
 	public BlackJack(PanelChangeListener listener){
-		setLayout(null);
 		
 		Player p1 = new Player();
 		Player dealer = new Player();
@@ -33,26 +34,27 @@ public class BlackJack extends JPanel{
 			}
 			
 		});
+		setLayout(null);
 		add(btnHelp);
 	
 		JLabel lblBetPlaced = new JLabel("Bet Placed: $" + p1.getbetAmount());
-		lblBetPlaced.setBounds(6, 261, 117, 16);
+		lblBetPlaced.setBounds(6, 261, 130, 16);
 		add(lblBetPlaced);
 		
 		JLabel lblAmountBet = new JLabel("Balance: $" + p1.getBalance());
-		lblAmountBet.setBounds(6, 289, 106, 16);
+		lblAmountBet.setBounds(6, 284, 130, 16);
 		add(lblAmountBet);
 		
 		textField = new JTextField();
-		textField.setBounds(0, 329, 130, 26);
+		textField.setBounds(6, 318, 130, 26);
 		add(textField);
 		textField.setColumns(10);
 		
 		textField.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				number = Integer.parseInt(textField.getText());
-				if(number <= p1.getBalance() && 0 <= p1.getbetAmount() && number >= 0){
+				number = Double.parseDouble(textField.getText());
+				if(number <= p1.getBalance() && 0 <= p1.getbetAmount() && number >= 0 && getTotalValueOfHand(p1) == 0){
 					//betAmount += number;
 					p1.changeBalance(-number);
 					p1.changebetAmount(number);
@@ -65,7 +67,7 @@ public class BlackJack extends JPanel{
 		});
 		
 		JLabel lblAmountBetting = new JLabel("Amount Betting:");
-		lblAmountBetting.setBounds(6, 313, 106, 16);
+		lblAmountBetting.setBounds(6, 304, 106, 16);
 		add(lblAmountBetting);
 		
 		JLabel lblDealerLabel = new JLabel("Dealer");
@@ -77,17 +79,43 @@ public class BlackJack extends JPanel{
 		add(lblPlayerLabel);
 		
 		JLabel lbldeckImage = new JLabel("");
-		lbldeckImage.setIcon(new ImageIcon("BlackCard.jpg"));
 		lbldeckImage.setBounds(171, 155, 116, 80);
+		lbldeckImage.setIcon(new ImageIcon("BlackCard.jpg"));
 		add(lbldeckImage);
 		
 		JLabel lblPlayerTotal = new JLabel("");
-		lblPlayerTotal.setBounds(206, 347, 61, 16);
+		lblPlayerTotal.setBounds(206, 353, 61, 16);
 		add(lblPlayerTotal);
 
 		JLabel lblDealerTotal = new JLabel("");
 		lblDealerTotal.setBounds(206, 64, 61, 16);
 		add(lblDealerTotal);
+
+		JButton btnEndTurn = new JButton("End Turn");
+		btnEndTurn.setBounds(6, 342, 117, 29);
+		add(btnEndTurn);
+		btnEndTurn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(getTotalValueOfHand(p1) > 0 && getTotalValueOfHand(dealer) > 0){	
+					multiplier = whoWinsWhat(p1,dealer);
+					number = number * multiplier;
+					p1.changeBalance(number);
+					p1.setbetAmount(0);
+					lblAmountBet.setText("Balance: $" + p1.getBalance());
+					lblBetPlaced.setText("Bet Placed: $" + p1.getbetAmount());
+					p1.resetHand();
+					dealer.resetHand();
+					lblPlayerTotal.setText(" " + getTotalValueOfHand(p1));
+					lblDealerTotal.setText("" + getTotalValueOfHand(dealer));
+				}
+			}
+		});
+
+		
+		JLabel lblCardsLeft = new JLabel("Cards Left: " + d1.getAvCards().size());
+		lblCardsLeft.setBounds(6, 169, 117, 16);
+		add(lblCardsLeft);
+		
 		
 		JButton btnHit = new JButton("Hit");
 		btnHit.setBounds(6, 367, 117, 29);
@@ -96,26 +124,29 @@ public class BlackJack extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(getTotalValueOfHand(p1) == 0 && getTotalValueOfHand(dealer) == 0){
-					p1.addCard(d1.hit());
+				if(d1.getAvCards().size() < 4){
+					d1.reset();
+				}
+				else if(getTotalValueOfHand(p1) == 0 && getTotalValueOfHand(dealer) == 0){ //Deals two cards to the player's and dealer's hands
 					p1.addCard(d1.hit());
 					dealer.addCard(d1.hit());
+					p1.addCard(d1.hit());
 					dealer.addCard(d1.hit());
 					lblPlayerTotal.setText(" " + getTotalValueOfHand(p1));
-					lblDealerTotal.setText("" + getTotalValueOfHand(dealer));
+					lblDealerTotal.setText("" + /*dealer.getHand().get(0).getValue()*/ getTotalValueOfHand(dealer));
 				}
-				else if(getTotalValueOfHand(p1) <= 21 && getTotalValueOfHand(p1) > 0){ //We know they will both be greater than 0 after the first if statement
-					if(d1.getAvCards().size() == 0){
-						lbldeckImage.setVisible(false);
-						//lblTotal.setText(" " + getTotalValueOfHand(p1));
-						//validate();
-					}
-					if(canHit(dealer) == true){
-						dealer.addCard(d1.hit());
-					}
-					lblPlayerTotal.setText(" " + getTotalValueOfHand(p1));
-					lblDealerTotal.setText("" + getTotalValueOfHand(dealer));
+				else if(getTotalValueOfHand(p1) < 21){ 
+					p1.addCard(d1.hit());
 				}
+				else if(canHit(dealer) == true){
+					dealer.addCard(d1.hit());
+				}
+				if(d1.getAvCards().size() == 0){
+					lbldeckImage.setVisible(false);
+				}
+				lblPlayerTotal.setText(" " + getTotalValueOfHand(p1));
+				lblDealerTotal.setText("" + /*dealer.getHand().get(0).getValue()*/ getTotalValueOfHand(dealer));
+				lblCardsLeft.setText("Cards Left: " + d1.getAvCards().size());
 			}
 		});
 		
@@ -129,10 +160,25 @@ public class BlackJack extends JPanel{
 		return total;
 	}
 		
-	public static boolean canHit(Player player){
+	public static boolean canHit(Player player){//Checks specifically if the dealer can hit, he can not hit if on or above 17
 		if(getTotalValueOfHand(player) >= 17){
 			return false;
 		}
 		return true;
+	}
+	
+	public static double whoWinsWhat(Player p1, Player p2){ //We are comparing the first player to the second player, returns a multiplier  of how much money the first player  will recieve
+		if(getTotalValueOfHand(p1) > 21 || getTotalValueOfHand(p1) < getTotalValueOfHand(p2) && getTotalValueOfHand(p2) < 21){ //If p1's hand is less than the other player's hand or is over 21 
+			return 0.0; //gets nothing back
+		}
+		if(getTotalValueOfHand(p1) > getTotalValueOfHand(p2) && getTotalValueOfHand(p1) < 21 ||
+				getTotalValueOfHand(p2) > 21 && getTotalValueOfHand(p1) < 21){ //If p1's hand is greater than the other player's hand and is less than 21  
+			return 2.0; //gets their money back and gets another set of it 
+		}
+		if(getTotalValueOfHand(p1) > getTotalValueOfHand(p2) && getTotalValueOfHand(p1) == 21 ||
+				getTotalValueOfHand(p2) > 21 && getTotalValueOfHand(p1) == 21){//If p1's hand is greater than the other player's hand and is equal to 21
+			return 2.5; //gets their money back and gets another set of it with an additional half of the amount as well
+		}
+		return 1.0;//If its a tie
 	}
 }
