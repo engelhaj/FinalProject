@@ -12,7 +12,7 @@ import javax.swing.JComboBox;
 public class BlackJack extends JPanel{
 	private PanelChangeListener listener;
 	private JTextField textField;
-	double number;
+	double number; 
 	double multiplier;
 	/**
 	 * Create the panel. 
@@ -54,8 +54,8 @@ public class BlackJack extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				number = Double.parseDouble(textField.getText());
-				if(number <= p1.getBalance() && 0 <= p1.getbetAmount() && number >= 0 && getTotalValueOfHand(p1) == 0){
-					//betAmount += number;
+				if(number <= p1.getBalance() && 0 <= p1.getbetAmount() && number >= 0 && getTotalValueOfHand(p1) == 0){ 
+					//The Player can not bet if they already have bet once this hand or if they already have drawn a card
 					p1.changeBalance(-number);
 					p1.changebetAmount(number);
 					lblAmountBet.setText("Balance: $" + p1.getBalance());
@@ -98,9 +98,10 @@ public class BlackJack extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				if(getTotalValueOfHand(p1) > 0 && getTotalValueOfHand(dealer) > 0){	
 					multiplier = whoWinsWhat(p1,dealer);
-					number = number * multiplier;
-					p1.changeBalance(number);
-					p1.setbetAmount(0);
+					number = number * multiplier;//Sets the bet amount to its self times the multiplier
+					p1.changeBalance(number); //Adds the number to the balance
+					p1.setbetAmount(0); //Resets their bet amount
+					number = 0;  //Resets the number used for adding to the balance
 					lblAmountBet.setText("Balance: $" + p1.getBalance());
 					lblBetPlaced.setText("Bet Placed: $" + p1.getbetAmount());
 					p1.resetHand();
@@ -124,10 +125,10 @@ public class BlackJack extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(d1.getAvCards().size() < 4){
+				if(d1.getAvCards().size() < 4 && getTotalValueOfHand(p1) == 0){
 					d1.reset();
 				}
-				else if(getTotalValueOfHand(p1) == 0 && getTotalValueOfHand(dealer) == 0){ //Deals two cards to the player's and dealer's hands
+				else if(getTotalValueOfHand(p1) == 0 && getTotalValueOfHand(dealer) == 0 && d1.getAvCards().size() >= 4){ //Deals two cards to the player's and dealer's hands
 					p1.addCard(d1.hit());
 					dealer.addCard(d1.hit());
 					p1.addCard(d1.hit());
@@ -143,6 +144,9 @@ public class BlackJack extends JPanel{
 				}
 				if(d1.getAvCards().size() == 0){
 					lbldeckImage.setVisible(false);
+				}
+				if(d1.getAvCards().size() > 0){
+					lbldeckImage.setVisible(true);
 				}
 				lblPlayerTotal.setText(" " + getTotalValueOfHand(p1));
 				lblDealerTotal.setText("" + /*dealer.getHand().get(0).getValue()*/ getTotalValueOfHand(dealer));

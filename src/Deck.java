@@ -8,17 +8,17 @@ public class Deck {
 		avCards = new ArrayList<>();
 		disCards = new ArrayList<>();
 		initializeDeck();
-		System.out.println("====Length When first made====");
-		System.out.println(avCards.size());
-		System.out.println(disCards.size());
-		System.out.println("====Length After Drawing Card====");
-		hit();
-		System.out.println(avCards.size());
-		System.out.println(disCards.size());
-		System.out.println("====Length After Reset====");
-		reset();
-		System.out.println(avCards.size());
-		System.out.println(disCards.size());
+//		System.out.println("====Length When first made====");
+//		System.out.println(avCards.size());
+//		System.out.println(disCards.size());
+//		System.out.println("====Length After Drawing Card====");
+//		hit();
+//		System.out.println(avCards.size());
+//		System.out.println(disCards.size());
+//		System.out.println("====Length After Reset====");
+//		reset();
+//		System.out.println(avCards.size());
+//		System.out.println(disCards.size());
 	}
 	private void initializeDeck(){
 		String[] suits = {"Spades", "Hearts", "Diamonds", "Clubs"};
