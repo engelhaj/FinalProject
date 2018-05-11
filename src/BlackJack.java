@@ -38,11 +38,11 @@ public class BlackJack extends JPanel{
 		add(btnHelp);
 	
 		JLabel lblBetPlaced = new JLabel("Bet Placed: $" + p1.getbetAmount());
-		lblBetPlaced.setBounds(6, 261, 130, 16);
+		lblBetPlaced.setBounds(6, 261, 184, 16);
 		add(lblBetPlaced);
 		
 		JLabel lblAmountBet = new JLabel("Balance: $" + p1.getBalance());
-		lblAmountBet.setBounds(6, 284, 130, 16);
+		lblAmountBet.setBounds(6, 284, 184, 16);
 		add(lblAmountBet);
 		
 		textField = new JTextField();
@@ -172,7 +172,7 @@ public class BlackJack extends JPanel{
 	}
 	
 	public static double whoWinsWhat(Player p1, Player p2){ //We are comparing the first player to the second player, returns a multiplier  of how much money the first player  will recieve
-		if(getTotalValueOfHand(p1) > 21 || getTotalValueOfHand(p1) < getTotalValueOfHand(p2) && getTotalValueOfHand(p2) < 21){ //If p1's hand is less than the other player's hand or is over 21 
+		if(getTotalValueOfHand(p1) > 21 || getTotalValueOfHand(p1) < getTotalValueOfHand(p2) && getTotalValueOfHand(p2) <= 21){ //If p1's hand is less than the other player's hand or is over 21 
 			return 0.0; //gets nothing back
 		}
 		if(getTotalValueOfHand(p1) > getTotalValueOfHand(p2) && getTotalValueOfHand(p1) < 21 ||
