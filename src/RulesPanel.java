@@ -93,6 +93,19 @@ public class RulesPanel extends JPanel{
 		lblSameSumAs.setBounds(285, 101, 159, 16);
 		add(lblSameSumAs);
 		
+		JLabel lblHowToBet = new JLabel("How to Bet:");
+		lblHowToBet.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblHowToBet.setBounds(208, 181, 93, 16);
+		add(lblHowToBet);
+		
+		JLabel lblNewLabel = new JLabel("1. Enter the amount you want to bet");
+		lblNewLabel.setBounds(218, 209, 226, 16);
+		add(lblNewLabel);
+		
+		JLabel lblWantToBet = new JLabel("before you hit and press enter.");
+		lblWantToBet.setBounds(238, 237, 206, 16);
+		add(lblWantToBet);
+		
 		
 	}
 }
