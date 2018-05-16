@@ -107,7 +107,7 @@ public class BlackJack extends JPanel{
 					p1.resetHand();
 					dealer.resetHand();
 					lblPlayerTotal.setText(" " + getTotalValueOfHand(p1));
-					lblDealerTotal.setText("" + /*getTotalValueOfHand(dealer)*/ dealer.getHand().get(0).getValue());
+					lblDealerTotal.setText("" + getTotalValueOfHand(dealer) /*dealer.getHand().get(0).getValue()*/);
 				}
 			}
 		});
