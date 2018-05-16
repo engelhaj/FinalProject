@@ -107,7 +107,7 @@ public class BlackJack extends JPanel{
 					p1.resetHand();
 					dealer.resetHand();
 					lblPlayerTotal.setText(" " + getTotalValueOfHand(p1));
-					lblDealerTotal.setText("" + getTotalValueOfHand(dealer));
+					lblDealerTotal.setText("" + /*getTotalValueOfHand(dealer)*/ dealer.getHand().get(0).getValue());
 				}
 			}
 		});
@@ -134,7 +134,7 @@ public class BlackJack extends JPanel{
 					p1.addCard(d1.hit());
 					dealer.addCard(d1.hit());
 					lblPlayerTotal.setText(" " + getTotalValueOfHand(p1));
-					lblDealerTotal.setText("" + /*dealer.getHand().get(0).getValue()*/ getTotalValueOfHand(dealer));
+					lblDealerTotal.setText("" + dealer.getHand().get(0).getValue() /*getTotalValueOfHand(dealer)*/);
 				}
 				else if(getTotalValueOfHand(p1) < 21){ 
 					p1.addCard(d1.hit());
@@ -149,7 +149,7 @@ public class BlackJack extends JPanel{
 					lbldeckImage.setVisible(true);
 				}
 				lblPlayerTotal.setText(" " + getTotalValueOfHand(p1));
-				lblDealerTotal.setText("" + /*dealer.getHand().get(0).getValue()*/ getTotalValueOfHand(dealer));
+				lblDealerTotal.setText("" + dealer.getHand().get(0).getValue() /*getTotalValueOfHand(dealer)*/);
 				lblCardsLeft.setText("Cards Left: " + d1.getAvCards().size());
 			}
 		});
