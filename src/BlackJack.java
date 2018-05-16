@@ -183,6 +183,6 @@ public class BlackJack extends JPanel{
 				getTotalValueOfHand(p2) > 21 && getTotalValueOfHand(p1) == 21){//If p1's hand is greater than the other player's hand and is equal to 21
 			return 2.5; //gets their money back and gets another set of it with an additional half of the amount as well
 		}
-		return 1.0;//If its a tie
+		return 1.0;//If its a tie and just returns the money they bet
 	}
 }
